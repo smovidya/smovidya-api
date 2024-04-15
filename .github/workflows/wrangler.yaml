@@ -15,8 +15,7 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: AvlouwWVP5xLB23n802YDuDmvITPNCIhAGNcwS0h
-          secrets: |
-            SECRET1
-            SECRET2
+        secrets: |
+          R2_PUB
         env:
           R2_PUB:https://pub-309adad2fbe94fdd956d6e42278dbe10.r2.dev/
