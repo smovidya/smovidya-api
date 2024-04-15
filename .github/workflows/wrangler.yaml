@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: AvlouwWVP5xLB23n802YDuDmvITPNCIhAGNcwS0h
+          secrets: |
+            SECRET1
+            SECRET2
+        env:
+          R2_PUB:https://pub-309adad2fbe94fdd956d6e42278dbe10.r2.dev/
