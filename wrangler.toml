@@ -1,0 +1,21 @@
+name = "smo-api"
+compatibility_date = "2023-12-01"
+
+# [vars]
+# MY_VAR = "my-variable"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+[[r2_buckets]]
+binding = "MY_BUCKET"
+bucket_name = "pussadu"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pussadu"
+database_id = "c61ee4d1-0160-4582-af56-2ac2d61aff3a"
+
+# [ai]
+# binding = "AI"
