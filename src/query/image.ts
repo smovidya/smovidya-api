@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { env } from "hono/adapter";
 import { detectType } from "../utils";
 import { sha256 } from "hono/utils/crypto";
+import { cache } from "hono/cache";
 
 type Bindings = {
   DB: D1Database;
@@ -14,6 +14,7 @@ type Data = {
   height?: string;
 };
 
+const maxAge = 60 * 60 * 24 * 90;
 const images = new Hono<{ Bindings: Bindings }>();
 
 images.post("/upload", async (c) => {
@@ -55,10 +56,24 @@ images.put("/upload", async (c) => {
   return c.text(key);
 });
 
-images.get("/:key", (c) => {
-  const key = c.req.param("key");
-  const { R2_PUB } = env<{ R2_PUB: string }>(c);
-  return c.json({ message: R2_PUB + key });
-});
+images.get(
+  '*',
+  cache({
+    cacheName: 'r2-image-worker'
+  })
+);
+
+images.get('/:key', async (c) => {
+  const key = c.req.param('key')
+
+  const object = await c.env.MY_BUCKET.get(key)
+  if (!object) return c.notFound()
+  const data = await object.arrayBuffer()
+  const contentType = object.httpMetadata?.contentType ?? ''
+  return c.body(data, 200, {
+    'Cache-Control': `public, max-age=${maxAge}`,
+    'Content-Type': contentType
+  })
+})
 
 export default images;
