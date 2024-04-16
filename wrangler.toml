@@ -20,10 +20,5 @@ database_id = "c61ee4d1-0160-4582-af56-2ac2d61aff3a"
 # [ai]
 # binding = "AI"
 
-[vars]
-DeeAppId = "app.vercel.pussaduvidyacu"
-DeeAppSecret = "173ad5e7266857d3d1eff3deab89674bdaceaddbca1c489007d5b5ac375d958eec92fcc6aad65b741d8cc48c9692e974df1985771231fc2dfc28b16f9dcee546"
-R2_PUB = "https://pub-309adad2fbe94fdd956d6e42278dbe10.r2.dev/"
-
 
 
