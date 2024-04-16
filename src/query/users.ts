@@ -1,4 +1,6 @@
 import { Hono } from "hono";
+import { PrismaClient, User } from "@prisma/client";
+import { PrismaD1 } from "@prisma/adapter-d1";
 
 type Bindings = {
   DB: D1Database;
@@ -17,6 +19,24 @@ query.get("/users/:id", async (c) => {
   } catch (e) {
     return c.json({ err: e }, 500);
   }
+});
+
+query.get("/count", async (c) => {
+  const adapter = new PrismaD1(c.env.DB);
+  const prisma = new PrismaClient({ adapter });
+  const count = await prisma.user.count();
+  return c.json({ count: count });
+});
+
+query.post("/users", async (c) => {
+  const data = await c.req.json<User>();
+  const adapter = new PrismaD1(c.env.DB);
+  const prisma = new PrismaClient({ adapter });
+  const count = await prisma.user.create({data: {
+    name: data.name,
+    email: data.email || "",
+  }});
+  return c.json({ count: count });
 });
 
 export default query;
