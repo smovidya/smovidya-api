@@ -19,7 +19,7 @@ app.use(
     origin: (origin, c) => {
       return origin.endsWith(".pages.dev")
         ? origin
-        : "https://pussaduvidyacu.vercel.app";
+        : "http://localhost:5173/";
     },
   })
 );
