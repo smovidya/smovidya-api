@@ -12,16 +12,19 @@ type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>();
 
 app.use(
-  '*',
+  "*",
   cors({
     // `c` is a `Context` object
     origin: (origin, c) => {
-      return origin.endsWith('.pages.dev') ? origin : 'https://pussaduvidya.pages.dev'
+      return origin.endsWith(".pages.dev")
+        ? origin
+        : "https://pussaduvidya.pages.dev";
     },
   })
-)
-app.route('/images', images);
-app.route('/query', query);
+);
+
+app.route("/images", images);
+app.route("/query", query);
 
 // Export our Hono app: Hono automatically exports a
 // Workers 'fetch' handler for you
