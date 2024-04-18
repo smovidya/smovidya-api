@@ -1,34 +1,18 @@
 import { Hono } from "hono";
 import { deleteCookie, setCookie } from "hono/cookie";
 import { env } from "hono/adapter";
-
-// "uid": "62beaa97772b3862594b32d6",
-// "username": "6534435223",
-// "gecos": "Bunyawat Naunnak, SCI",
-// "email": "6534435223@student.chula.ac.th",
-// "disable": false,
-// "roles": [
-//     "student"
-// ],
-// "firstname": "Bunyawat",
-// "lastname": "Naunnak",
-// "firstnameth": "บัญญวัฒ",
-// "lastnameth": "นวลนาค",
-// "ouid": "6534435223"
-
 interface UserData {
-    firstname: string;
-    lastname: string;
-    ouid: string;
-    username: string;
-    gecos: string;
-    email: string;
-    disable: boolean;
-    roles: string[];
-    firtnameth: string;
-    lastnameth: string;
-  }
-  
+  firstname: string;
+  lastname: string;
+  ouid: string;
+  username: string;
+  gecos: string;
+  email: string;
+  disable: boolean;
+  roles: string[];
+  firtnameth: string;
+  lastnameth: string;
+}
 
 const auth = new Hono();
 
@@ -76,7 +60,7 @@ const serviceValidation = async (
 auth.get("/callback/:ticket", async (c) => {
   const { DeeAppId } = env<{ DeeAppId: string }>(c);
   const { DeeAppSecret } = env<{ DeeAppSecret: string }>(c);
-  const ticket = c.req.param('ticket');
+  const ticket = c.req.param("ticket");
 
   if (!ticket) {
     return c.json({
@@ -92,11 +76,11 @@ auth.get("/callback/:ticket", async (c) => {
   );
   if (status === 200 && message != null) {
     console.log(message);
-    const datas : UserData = message as UserData;
-    return c.json({message: datas});
+    const datas: UserData = message as UserData;
+    return c.json({ message: datas });
   }
 
-  return c.json({ message: message});
+  return c.json({ message: message });
 });
 
 auth.get("/signout", (c) => {
@@ -108,8 +92,8 @@ auth.get("/signout", (c) => {
   );
 });
 
-auth.get('/t', (c) => {
-    return c.text("Hello");
-})
+auth.get("/t", (c) => {
+  return c.text("Hello");
+});
 
 export default auth;
