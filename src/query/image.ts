@@ -53,7 +53,7 @@ images.put("/upload", async (c) => {
     httpMetadata: { contentType: type?.mimeType },
   });
 
-  return c.text(key);
+  return c.json({key});
 });
 
 images.get(

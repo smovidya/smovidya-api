@@ -2,8 +2,11 @@ name = "smo-api"
 compatibility_date = "2023-12-01"
 node_compat = true
 
-# [vars]
-# MY_VAR = "my-variable"
+[vars]
+MY_VAR = "my-variable"
+R2_PUB = "https://pub-309adad2fbe94fdd956d6e42278dbe10.r2.dev/"
+DeeAppId = "app.vercel.pussaduvidyacu"
+DeeAppSecret = "173ad5e7266857d3d1eff3deab89674bdaceaddbca1c489007d5b5ac375d958eec92fcc6aad65b741d8cc48c9692e974df1985771231fc2dfc28b16f9dcee546"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
