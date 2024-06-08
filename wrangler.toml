@@ -15,6 +15,7 @@ DeeAppSecret = "173ad5e7266857d3d1eff3deab89674bdaceaddbca1c489007d5b5ac375d958e
 [[r2_buckets]]
 binding = "MY_BUCKET"
 bucket_name = "pussadu"
+preview_bucket_name = "test"
 
 [[d1_databases]]
 binding = "DB"
