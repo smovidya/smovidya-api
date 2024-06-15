@@ -57,10 +57,10 @@ const serviceValidation = async (
   }
 };
 
-auth.get("/callback/:ticket", async (c) => {
+auth.get("/callback", async (c) => {
   const { DeeAppId } = env<{ DeeAppId: string }>(c);
   const { DeeAppSecret } = env<{ DeeAppSecret: string }>(c);
-  const ticket = c.req.param("ticket");
+  const ticket = c.req.query("ticket");
 
   if (!ticket) {
     return c.json({
@@ -77,7 +77,15 @@ auth.get("/callback/:ticket", async (c) => {
   if (status === 200 && message != null) {
     console.log(message);
     const datas: UserData = message as UserData;
-    return c.json({ message: datas });
+    setCookie(c, "student_id", datas.ouid, {
+      path: "/",
+      secure: true,
+      domain: "pussadusmocu.vercel.app",
+      httpOnly: true,
+      maxAge: 1000,
+      expires: new Date(Date.UTC(2025, 11, 24, 10, 30, 59, 900)),
+    });
+    return c.redirect("https://pussadusmocu.vercel.app/users/home", 302);
   }
 
   return c.json({ message: message });
