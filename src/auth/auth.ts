@@ -77,7 +77,12 @@ auth.get("/callback", async (c) => {
   if (status === 200 && message != null) {
     console.log(message);
     const datas: UserData = message as UserData;
-    setCookie(c, "student_id", datas.ouid);
+    setCookie(c, "student_id", datas.ouid, {
+      sameSite: "None",
+      secure:true,
+      httpOnly:true,
+      domain:"pussadusmocu.vercel.app",
+    });
     
     return c.redirect("https://pussadusmocu.vercel.app/users/home", 302);
   }
