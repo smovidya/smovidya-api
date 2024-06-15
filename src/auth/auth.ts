@@ -83,6 +83,7 @@ auth.get("/callback", async (c) => {
       domain: "pussadusmocu.vercel.app",
       httpOnly: true,
       maxAge: 10000,
+      sameSite: "Strict"
     });
     return c.redirect("https://pussadusmocu.vercel.app/users/home", 302);
   }
